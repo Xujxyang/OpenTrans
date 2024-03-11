@@ -100,6 +100,41 @@ You can configure the dataset and runtime environment based on the settings prov
     <td align="center">19.1M</td>
     <td align="center">146.8G</td>
   </tr>
+    <tr>
+    <td align="center">FC-CLIP</td>
+    <td align="center">58.7</td>
+    <td align="center">53.2</td>
+    <td align="center">23.3</td>
+    <td align="center">7.1</td>
+    <td align="center">89.5</td>
+    <td align="center">50.5</td>
+    <td align="center">12.9</td>
+    <td align="center">39.0M</td>
+    <td align="center">200.1G</td>
+  </tr>
+    <tr>
+    <td align="center">Random(FC-CLIP)</td>
+    <td align="center">52.8</td>
+    <td align="center">50.0</td>
+    <td align="center">17.2</td>
+    <td align="center">3.2</td>
+    <td align="center">85.5</td>
+    <td align="center">44.8</td>
+    <td align="center">8.7</td>
+    <td align="center">17.8M</td>
+    <td align="center">105.6G</td>
+  </tr>
+    <tr>
+    <td align="center">Ours(FC-CLIP)</td>
+    <td align="center">56.8</td>
+    <td align="center">52.1</td>
+    <td align="center">19.1</td>
+    <td align="center">4.2</td>
+    <td align="center">87.6</td>
+    <td align="center">47.4</td>
+    <td align="center">9.9</td>
+    <td align="center">17.8M</td>
+    <td align="center">105.6G</td>
+  </tr>****
 </tbody>
-  
 </table>
