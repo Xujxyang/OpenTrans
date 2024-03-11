@@ -1,0 +1,24 @@
+_BASE_: ../maskformer2_R50_bs16_50ep_voca_ground_perRegion.yaml
+MODEL:
+  BACKBONE:
+    NAME: "D2SwinTransformer"
+  SWIN:
+    EMBED_DIM: 128
+    DEPTHS: [2, 2, 18, 2]
+    NUM_HEADS: [4, 8, 16, 32]
+    WINDOW_SIZE: 12
+    APE: False
+    DROP_PATH_RATE: 0.3
+    PATCH_NORM: True
+    PRETRAIN_IMG_SIZE: 384
+  VISION_FEATURE: "queryClass"
+  WEIGHTS: "swin_base_patch4_window12_384.pkl"
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+DATASETS:
+  TRAIN: ("coco_2017_train_panoptic_caption",)
+  TEST: ("coco_2017_val_panoptic_caption", "ade20k_sem_seg_val", "cityscapes_fine_panoptic_val", ) #("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )
+TEST:
+  EVAL_PERIOD: 50_000
+SOLVER:
+  IMS_PER_BATCH: 80

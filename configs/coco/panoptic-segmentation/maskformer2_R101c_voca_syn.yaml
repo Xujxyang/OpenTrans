@@ -1,0 +1,12 @@
+_BASE_: maskformer2_R50_bs16_50ep_voca_ground_perRegion_syn.yaml
+MODEL:
+  WEIGHTS: ""
+  RESNETS:
+    LAYERS: [3, 4, 23, 3]
+    OUTPUT_DIM: 512
+    INPUT_RESOLUTION: 512
+    OUT_FEATURES: ["res2", "res3", "res4", "res5", "attn"]
+    PRETRAINED: 'pretrained/RN101.pt'
+  TEXT_ENCODER:
+    PRETRAINED: 'pretrained/RN101.pt'
+    EMBED_DIM: 512

@@ -1,0 +1,52 @@
+# Copyright (c) Facebook, Inc. and its affiliates.
+from . import data  # register all new datasets
+from . import modeling
+
+# config
+from .config import add_maskformer2_config
+
+# dataset loading
+from .data.dataset_mappers.coco_instance_new_baseline_dataset_mapper import COCOInstanceNewBaselineDatasetMapper
+from .data.dataset_mappers.coco_panoptic_new_baseline_dataset_mapper import COCOPanopticNewBaselineDatasetMapper
+from .data.dataset_mappers.mask_former_instance_dataset_mapper import (
+    MaskFormerInstanceDatasetMapper,
+)
+from .data.dataset_mappers.mask_former_panoptic_dataset_mapper import (
+    MaskFormerPanopticDatasetMapper,
+)
+from .data.dataset_mappers.mask_former_semantic_dataset_mapper import (
+    MaskFormerSemanticDatasetMapper,
+)
+
+# models
+from .maskformer_model import MaskFormer
+from .test_time_augmentation import SemanticSegmentorWithTTA
+
+# evaluation
+from .evaluation.instance_evaluation import InstanceSegEvaluator
+
+from .data.dataset_mappers.detr_panoptic_caption_dataset_mapper import DETRPanopticCaptionDatasetMapper
+from .data.dataset_mappers.detr_panoptic_caption_des_dataset_mapper import DETRPanopticCaptionDesDatasetMapper
+from .data.dataset_mappers.detr_panoptic_caption_syn_dataset_mapper import DETRPanopticCaptionSynDatasetMapper
+from .data.dataset_mappers.detr_panoptic_caption_neg_dataset_mapper import DETRPanopticCaptionNegDatasetMapper
+from .data.dataset_mappers.detr_panoptic_caption_kd_dataset_mapper import DETRPanopticCaptionKDDatasetMapper
+from .data.dataset_mappers.detr_panoptic_caption_syn_kd_dataset_mapper import DETRPanopticCaptionSynKDDatasetMapper
+from .data.dataset_mappers.deeplab_panoptic_caption_kd_dataset_mapper import DeeplabPanopticCaptionKDDatasetMapper
+from .data.dataset_mappers.dataset_mapper_voca import DatasetMapperVoca
+from .maskformer_model_voca import OpenSegMaskFormer
+from .maskformer_model_voca_kd import OpenSegKDMaskFormer
+from .maskformer_model_voca_kd_from_scratch import OpenSegMaskFormerPlainKD
+from .maskformer_model_voca_syn_kd import OpenSegMaskFormerPlainKDSyn
+from .maskformer_model_voca_syn_kd_text import OpenSegMaskFormerTextKDSyn
+from .maskformer_model_voca_dense_kd_syn import OpenSegMaskFormerDenseTextKDSyn
+from .maskformer_model_voca_dense_kd import OpenSegMaskFormerDenseTextKD
+from .maskformer_model_voca_dense import OpenSegMaskFormerDense
+from .maskformer_model_voca_syn import OpenSegMaskFormerSyn
+from .maskformer_model_voca_debug import OpenSegMaskFormerDebug
+from .maskformer_model_voca_textNoise import OpenSegMaskNoiseFormer
+from .maskformer_model_voca_dense_kd_imp import OpenSegMaskFormerDenseTextKDentropy
+from .clip_models import CLIPResNetWithAttention, CLIPVisionTransformer, CLIPResNetWithAttentionLora
+from .Deeplabv3 import OpenSegDeeplabv3Text
+
+# hook
+from .hook.save_lastest import PeriodicCheckpointerLastest

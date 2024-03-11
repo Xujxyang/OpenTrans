@@ -1,0 +1,90 @@
+_BASE_: Base-COCO-PanopticSegmentation.yaml
+MODEL:
+  META_ARCHITECTURE: "OpenSegMaskFormerSyn"
+  WEIGHTS: ""
+  SEM_SEG_HEAD:
+    NAME: "MaskFormerHead"
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+    IGNORE_VALUE: 255
+    NUM_CLASSES: 133
+    LOSS_WEIGHT: 1.0
+    CONVS_DIM: 256
+    MASK_DIM: 256
+    NORM: "GN"
+    # pixel decoder
+    PIXEL_DECODER_NAME: "MSDeformAttnPixelDecoder"
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+    DEFORMABLE_TRANSFORMER_ENCODER_IN_FEATURES: ["res3", "res4", "res5"]
+    COMMON_STRIDE: 4
+    TRANSFORMER_ENC_LAYERS: 6
+  MASK_FORMER:
+    TRANSFORMER_DECODER_NAME: "MultiScaleMaskedTransformerDecoderVoca"
+    TRANSFORMER_IN_FEATURE: "multi_scale_pixel_decoder"
+    DEEP_SUPERVISION: True
+    NO_OBJECT_WEIGHT: 0.05
+    CLASS_WEIGHT: 10.0
+    MASK_WEIGHT: 5.0
+    DICE_WEIGHT: 5.0
+    HIDDEN_DIM: 256
+    NUM_OBJECT_QUERIES: 100
+    NHEADS: 8
+    DROPOUT: 0.0
+    DIM_FEEDFORWARD: 2048
+    ENC_LAYERS: 0
+    PRE_NORM: False
+    ENFORCE_INPUT_PROJ: False
+    SIZE_DIVISIBILITY: 32
+    DEC_LAYERS: 10  # 9 decoder layers, add one for the loss on learnable query
+    TRAIN_NUM_POINTS: 12544
+    OVERSAMPLE_RATIO: 3.0
+    IMPORTANCE_SAMPLE_RATIO: 0.75
+    TEST:
+      SEMANTIC_ON: True
+      INSTANCE_ON: True
+      PANOPTIC_ON: True
+      OVERLAP_THRESHOLD: 0.8
+      OBJECT_MASK_THRESHOLD: 0.8
+    MASK_CLASSIFICATION: False
+  BACKBONE:
+    NAME: "CLIPVisionTransformer"
+  VIT:
+    OUT_FEATURES: ["res2", "res3", "res4", "res5", "attn"]
+    PRETRAINED: 'pretrained/ViT-B-16.pt'
+  TEXT_ENCODER:
+    INPUT: 'coco'
+    EMBED_DIM: 512
+    PRETRAINED: 'pretrained/ViT-B-16.pt'
+  PER_REGION: 
+    ENABLED: True
+    DROPOUT: 0.5
+    PLAIN_LOSS_WEIGHT: 10.0
+    PLAIN_CLASS: False
+    SYN_CLASS:
+      ENABLED: True
+      TYPE: 'clusterMax'   # ['thresRand', 'clusterMax', 'clusterAvg']
+      LOSS_WEIGHT: 10.0
+  VISION_FEATURE: 'resAtten'
+  GROUNDING:
+    ENABLED: True
+    LOSS_WEIGHT: 10.0
+    LOCAL_METRIC: 'clip_cosine'
+  LEARNED_TEMP: True
+DATASETS:
+  TRAIN: ("coco_2017_train_panoptic_caption_syn",)
+  TEST: ("coco_2017_val_panoptic_caption", ) #("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )
+INPUT:
+  IMAGE_SIZE: 640
+  CROP:
+    ENABLED: False
+  SCALE_RESIZE:
+    ENABLED: True
+  DATASET_MAPPER_NAME: "detr_panoptic_caption_syn"
+SOLVER:
+  IMS_PER_BATCH: 112      # 16
+  MAX_ITER: 50_000        # 100_000       # 46_094        # 368750
+  STEPS: (40_000, 45_000) # (85_000, 95_000) # (40_973, 44_387) # (327778, 355092)
+  BASE_LR: 0.0003         # 0.0001
+TEST:
+  EVAL_PERIOD: 200_000
+DATALOADER:
+  NUM_WORKERS: 32

@@ -1,0 +1,42 @@
+_BASE_: Base-COCO-PanopticSegmentation.yaml
+MODEL:
+  META_ARCHITECTURE: "OpenSegDeeplabv3Text" # OpenSegKDMaskFormer
+  WEIGHTS: ""
+  BACKBONE:
+    NAME: "CLIPResNetWithAttention"
+  RESNETS:
+    LAYERS: [3, 4, 6, 3]
+    OUTPUT_DIM: 1024
+    INPUT_RESOLUTION: 512
+    OUT_FEATURES: ["res2", "res3", "res4", "res5", "attn"]
+    PRETRAINED: 'pretrained/RN50.pt'
+  TEXT_ENCODER:
+    INPUT: 'coco'
+    PRETRAINED: 'pretrained/RN50.pt'
+  PER_REGION: 
+    ENABLED: True
+    DROPOUT: 0.5
+    PLAIN_LOSS_WEIGHT: 10.0
+  LEARNED_TEMP: True
+DATASETS:
+  TRAIN: ("coco_2017_train_panoptic_caption",)
+  TEST: ("coco_2017_val_panoptic_caption", "ade20k_sem_seg_val", "cityscapes_fine_panoptic_val", ) #("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )
+  # TEST: ("coco_2017_val_panoptic_caption_novel", "coco_2017_val_panoptic_caption_base") #("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )
+  # TEST: ("vipseg_val_base_image", "vipseg_val_novel_image")
+  # TEST: ("cityscapes_fine_panoptic_val", )
+INPUT:
+  CROP:
+    ENABLED: False
+  SCALE_RESIZE:
+    ENABLED: True
+  DATASET_MAPPER_NAME: "detr_panoptic_caption"
+SOLVER:
+  IMS_PER_BATCH: 28      #28      # 16
+  MAX_ITER: 50_001        # 100_000       # 46_094        # 368750    #50_000
+  STEPS: (40_000, 45_000)   # (40_973, 44_387) # (327778, 355092)  #(40_000, 45_000) (180_000, 185_000)  
+  BASE_LR: 0.001         # 0.0001  #ky 0.0003
+TEST:
+  EVAL_PERIOD: 200_000
+DATALOADER:
+  NUM_WORKERS: 4
+

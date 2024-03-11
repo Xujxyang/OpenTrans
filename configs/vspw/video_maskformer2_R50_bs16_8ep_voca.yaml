@@ -1,0 +1,98 @@
+_BASE_: Base-VSPW.yaml
+MODEL:
+  WEIGHTS: "ckpt_cocoBaseIgnore_query_ins_proj.pth"
+  # WEIGHTS: ""
+  META_ARCHITECTURE: "OpenSegVideoMaskFormer"
+  SEM_SEG_HEAD:
+    NAME: "MaskFormerHead"
+    IGNORE_VALUE: 255
+    NUM_CLASSES: 112 # 152 # ytvis+vipseg_novel_w/o_animal #139 # 40 # 40 # 112 # 124     # todo
+    LOSS_WEIGHT: 1.0
+    CONVS_DIM: 256
+    MASK_DIM: 256
+    NORM: "GN"
+    # pixel decoder
+    PIXEL_DECODER_NAME: "MSDeformAttnPixelDecoder"
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+    DEFORMABLE_TRANSFORMER_ENCODER_IN_FEATURES: ["res3", "res4", "res5"]
+    COMMON_STRIDE: 4
+    TRANSFORMER_ENC_LAYERS: 6
+  MASK_FORMER:
+    TRANSFORMER_DECODER_NAME: "VideoMultiScaleMaskedTransformerDecoderVoca"
+    TRANSFORMER_IN_FEATURE: "multi_scale_pixel_decoder"
+    DEEP_SUPERVISION: True
+    NO_OBJECT_WEIGHT: 0.1
+    CLASS_WEIGHT: 2.0
+    MASK_WEIGHT: 5.0
+    DICE_WEIGHT: 5.0
+    HIDDEN_DIM: 256
+    NUM_OBJECT_QUERIES: 100
+    NHEADS: 8
+    DROPOUT: 0.0
+    DIM_FEEDFORWARD: 2048
+    ENC_LAYERS: 0
+    PRE_NORM: False
+    ENFORCE_INPUT_PROJ: False
+    SIZE_DIVISIBILITY: 32
+    DEC_LAYERS: 10  # 9 decoder layers, add one for the loss on learnable query
+    TRAIN_NUM_POINTS: 12544
+    OVERSAMPLE_RATIO: 3.0
+    IMPORTANCE_SAMPLE_RATIO: 0.75
+    TEST:
+      SEMANTIC_ON: True
+      INSTANCE_ON: False
+      PANOPTIC_ON: False
+      OVERLAP_THRESHOLD: 0.8
+      OBJECT_MASK_THRESHOLD: 0.8
+    MASK_CLASSIFICATION: False
+  BACKBONE:
+    NAME: "CLIPResNetWithAttention"
+  RESNETS:
+    LAYERS: [3, 4, 6, 3]
+    OUTPUT_DIM: 1024
+    INPUT_RESOLUTION: 512
+    OUT_FEATURES: ["res2", "res3", "res4", "res5", "attn"]
+    PRETRAINED: 'pretrained/RN50.pt'
+  TEXT_ENCODER:
+    INPUT: 'caption' # todo
+    PRETRAINED: 'pretrained/RN50.pt'
+  PER_REGION: 
+    INS_CAP_ENABLE: False
+    INS_CAP_WEIGHT: 5.0
+    ENABLED: True
+    DROPOUT: 0.5
+    PLAIN_LOSS_WEIGHT: 10.0
+  VISION_FEATURE: 'queryClass'
+  GROUNDING:
+    ENABLED: False
+    LOSS_WEIGHT: 10.0
+    LOCAL_METRIC: 'clip_cosine'
+  LEARNED_TEMP: True
+DATASETS:
+  TRAIN: ("vipseg_train_cap_base_ignore",) 
+  # TRAIN: ("vipseg_train_cap_base_ignore", "ytvis_2019_train_voca")  
+  # TRAIN: ("ytvis_2019_train_voca", "vipseg_train_cap_all")
+  # TEST: ("coco_2017_val_panoptic_caption", ) #("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )
+  # TEST: ("ytvis_2019_val_voca", )
+  TEST: ("vipseg_val_novel", )
+  # TEST: ("vipseg_val_base", )
+  # TEST: ("vipseg_val", )
+INPUT:
+  CROP:
+    ENABLED: False
+  SCALE_RESIZE:
+    ENABLED: True
+  # DATASET_MAPPER_NAME: "detr_panoptic_caption"    # todo
+SOLVER:
+  # IMS_PER_BATCH: 112   #112   # 16    # todo
+  # MAX_ITER: 10_000        # 100_000       # 46_094        # 368750
+  # STEPS: (8_000, 9_000) # (85_000, 95_000) # (40_973, 44_387) # (327778, 355092)
+  # BASE_LR: 0.0003         # 0.0001
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.0001
+  STEPS: (4000,)
+  MAX_ITER: 6000
+TEST:
+  EVAL_PERIOD: 200_000
+DATALOADER:
+  NUM_WORKERS: 4

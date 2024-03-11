@@ -1,0 +1,133 @@
+[03/11 12:31:35] detectron2 INFO: Rank of current process: 3. World size: 4
+[03/11 12:31:38] detectron2 INFO: Environment info:
+-------------------------------  -----------------------------------------------------------------------------------------------
+sys.platform                     linux
+Python                           3.9.16 (main, May 15 2023, 23:46:34) [GCC 11.2.0]
+numpy                            1.23.3
+detectron2                       0.6 @/opt/data/private/xjx/detectron2/detectron2
+Compiler                         GCC 9.3
+CUDA compiler                    CUDA 11.2
+detectron2 arch flags            8.6
+DETECTRON2_ENV_MODULE            <not set>
+PyTorch                          1.13.0 @/opt/data/private/xjx/anaconda3/envs/detectron2/lib/python3.9/site-packages/torch
+PyTorch debug build              False
+torch._C._GLIBCXX_USE_CXX11_ABI  False
+GPU available                    Yes
+GPU 0,1,2,3                      NVIDIA GeForce RTX 4090 (arch=8.9)
+Driver version                   525.105.17
+CUDA_HOME                        /usr/local/cuda
+Pillow                           9.5.0
+torchvision                      0.14.0 @/opt/data/private/xjx/anaconda3/envs/detectron2/lib/python3.9/site-packages/torchvision
+torchvision arch flags           3.5, 5.0, 6.0, 7.0, 7.5, 8.0, 8.6
+fvcore                           0.1.5.post20221221
+iopath                           0.1.9
+cv2                              4.8.1
+-------------------------------  -----------------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.6.0 (Git Hash 52b5f107dd9cf10910aaa19cb47f3abf9b349815)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.7
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.5
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.7, CUDNN_VERSION=8.5.0, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wunused-local-typedefs -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.13.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+[03/11 12:31:38] detectron2 INFO: Command line arguments: Namespace(config_file='configs/coco/panoptic-segmentation/maskformer2_R50_bs16_50ep_voca_ground_perRegion.yaml', resume=True, eval_only=False, num_gpus=4, num_machines=1, machine_rank=0, dist_url='tcp://127.0.0.1:49152', opts=['MODEL.META_ARCHITECTURE', 'OpenSegMaskFormerDenseTextKDLora', 'OUTPUT_DIR', 'lora_TEST', 'MODEL.KD.STU_SOURCE', 'prior', 'MODEL.KD.TEC_SOURCE', 'attn_g', 'INPUT.DATASET_MAPPER_NAME', 'detr_panoptic_caption_kd', 'MODEL.PER_REGION.DENSE_SUPERVISE', 'True', 'MODEL.PER_REGION.PLAIN_LOSS_WEIGHT', '2.0', 'MODEL.KD.KD_WEIGHT', '2.0', 'MODEL.GROUNDING.LOSS_WEIGHT', '2.0', 'MODEL.KD.ENABLED', 'True'])
+[03/11 12:31:38] detectron2 INFO: Contents of args.config_file=configs/coco/panoptic-segmentation/maskformer2_R50_bs16_50ep_voca_ground_perRegion.yaml:
+[38;5;197m_BASE_[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mBase-COCO-PanopticSegmentation.yaml[39m
+[38;5;197mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mMETA_ARCHITECTURE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mOpenSegMaskFormer[39m[38;5;186m"[39m[38;5;15m [39m[38;5;242m# OpenSegKDMaskFormer[39m
+[38;5;15m  [39m[38;5;197mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;197mSEM_SEG_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mMaskFormerHead[39m[38;5;186m"[39m
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;186m"[39m[38;5;186mres2[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres3[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres4[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres5[39m[38;5;186m"[39m[38;5;15m][39m
+[38;5;15m    [39m[38;5;197mIGNORE_VALUE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m255[39m
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m133[39m
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;197mCONVS_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;197mMASK_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mGN[39m[38;5;186m"[39m
+[38;5;15m    [39m[38;5;242m# pixel decoder[39m
+[38;5;15m    [39m[38;5;197mPIXEL_DECODER_NAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mMSDeformAttnPixelDecoder[39m[38;5;186m"[39m
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;186m"[39m[38;5;186mres2[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres3[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres4[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres5[39m[38;5;186m"[39m[38;5;15m][39m
+[38;5;15m    [39m[38;5;197mDEFORMABLE_TRANSFORMER_ENCODER_IN_FEATURES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;186m"[39m[38;5;186mres3[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres4[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres5[39m[38;5;186m"[39m[38;5;15m][39m
+[38;5;15m    [39m[38;5;197mCOMMON_STRIDE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4[39m
+[38;5;15m    [39m[38;5;197mTRANSFORMER_ENC_LAYERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m6[39m
+[38;5;15m  [39m[38;5;197mMASK_FORMER[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mTRANSFORMER_DECODER_NAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mMultiScaleMaskedTransformerDecoderVoca[39m[38;5;186m"[39m
+[38;5;15m    [39m[38;5;197mTRANSFORMER_IN_FEATURE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mmulti_scale_pixel_decoder[39m[38;5;186m"[39m
+[38;5;15m    [39m[38;5;197mDEEP_SUPERVISION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;15m    [39m[38;5;197mNO_OBJECT_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.1[39m
+[38;5;15m    [39m[38;5;197mCLASS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m    [39m[38;5;197mMASK_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m5.0[39m
+[38;5;15m    [39m[38;5;197mDICE_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m5.0[39m
+[38;5;15m    [39m[38;5;197mHIDDEN_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;197mNUM_OBJECT_QUERIES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m100[39m
+[38;5;15m    [39m[38;5;197mNHEADS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m8[39m
+[38;5;15m    [39m[38;5;197mDROPOUT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;15m    [39m[38;5;197mDIM_FEEDFORWARD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2048[39m
+[38;5;15m    [39m[38;5;197mENC_LAYERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;197mPRE_NORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFalse[39m
+[38;5;15m    [39m[38;5;197mENFORCE_INPUT_PROJ[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFalse[39m
+[38;5;15m    [39m[38;5;197mSIZE_DIVISIBILITY[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m32[39m
+[38;5;15m    [39m[38;5;197mDEC_LAYERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m10[39m[38;5;15m  [39m[38;5;242m# 9 decoder layers, add one for the loss on learnable query[39m
+[38;5;15m    [39m[38;5;197mTRAIN_NUM_POINTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m12544[39m
+[38;5;15m    [39m[38;5;197mOVERSAMPLE_RATIO[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m3.0[39m
+[38;5;15m    [39m[38;5;197mIMPORTANCE_SAMPLE_RATIO[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.75[39m
+[38;5;15m    [39m[38;5;197mTEST[39m[38;5;15m:[39m
+[38;5;15m      [39m[38;5;197mSEMANTIC_ON[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;15m      [39m[38;5;197mINSTANCE_ON[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFalse[39m
+[38;5;15m      [39m[38;5;197mPANOPTIC_ON[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFalse[39m
+[38;5;15m      [39m[38;5;197mOVERLAP_THRESHOLD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.8[39m
+[38;5;15m      [39m[38;5;197mOBJECT_MASK_THRESHOLD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.8[39m
+[38;5;15m    [39m[38;5;197mMASK_CLASSIFICATION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFalse[39m
+[38;5;15m  [39m[38;5;197mBACKBONE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mCLIPResNetWithAttention[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;197mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mLAYERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;15m3[39m[38;5;15m,[39m[38;5;15m [39m[38;5;15m4[39m[38;5;15m,[39m[38;5;15m [39m[38;5;15m6[39m[38;5;15m,[39m[38;5;15m [39m[38;5;15m3[39m[38;5;15m][39m
+[38;5;15m    [39m[38;5;197mOUTPUT_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1024[39m
+[38;5;15m    [39m[38;5;197mINPUT_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;197mOUT_FEATURES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;186m"[39m[38;5;186mres2[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres3[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres4[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mres5[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mattn[39m[38;5;186m"[39m[38;5;15m][39m
+[38;5;15m    [39m[38;5;197mPRETRAINED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186mpretrained/RN50.pt[39m[38;5;186m'[39m
+[38;5;15m  [39m[38;5;197mTEXT_ENCODER[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mINPUT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186mcoco[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mPRETRAINED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186mpretrained/RN50.pt[39m[38;5;186m'[39m
+[38;5;15m  [39m[38;5;197mPER_REGION[39m[38;5;15m:[39m[38;5;15m [39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;15m    [39m[38;5;197mDROPOUT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;197mPLAIN_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m  [39m[38;5;197mVISION_FEATURE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186mqueryClass[39m[38;5;186m'[39m[38;5;15m [39m[38;5;242m# 'res5' 'resAtten' 'pixelDecoder' 'queryClass'[39m
+[38;5;15m  [39m[38;5;197mGROUNDING[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m    [39m[38;5;197mLOCAL_METRIC[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186mclip_cosine[39m[38;5;186m'[39m
+[38;5;15m  [39m[38;5;197mLEARNED_TEMP[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;197mDATASETS[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mTRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m("coco_2017_train_panoptic_caption",)[39m[38;5;15m   [39m[38;5;242m# coco_2017_train_panoptic_caption_base_delete #coco_2017_train_panoptic_caption[39m
+[38;5;15m  [39m[38;5;197mTEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m("coco_2017_val_panoptic_caption",[39m[38;5;141m [39m[38;5;141m"ade20k_sem_seg_val",[39m[38;5;141m [39m[38;5;141m"cityscapes_fine_panoptic_val",[39m[38;5;141m [39m[38;5;141m)[39m[38;5;15m [39m[38;5;242m#("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )[39m
+[38;5;15m  [39m[38;5;242m# TEST: ("coco_2017_val_panoptic_caption_novel", "coco_2017_val_panoptic_caption_base") #("coco_2017_val_panoptic_caption", ) # ("cityscapes_fine_panoptic_val", )[39m
+[38;5;15m  [39m[38;5;242m# TEST: ("vipseg_val_base_image", "vipseg_val_novel_image")[39m
+[38;5;15m  [39m[38;5;242m# TEST: ("cityscapes_fine_panoptic_val", )[39m
+[38;5;197mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mCROP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFalse[39m
+[38;5;15m  [39m[38;5;197mSCALE_RESIZE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;15m  [39m[38;5;197mDATASET_MAPPER_NAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mdetr_panoptic_caption[39m[38;5;186m"[39m
+[38;5;197mSEED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;197mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m  [39m[38;5;141m28[39m[38;5;15m        [39m[38;5;242m#28      # 16[39m
+[38;5;15m  [39m[38;5;197mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m50_001[39m[38;5;15m    [39m[38;5;242m# 100_000       # 46_094        # 368750    #50_000[39m
+[38;5;15m  [39m[38;5;197mSTEPS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m(20_000,[39m[38;5;141m [39m[38;5;141m25_000)[39m[38;5;15m   [39m[38;5;242m# (40_973, 44_387) # (327778, 355092)  #(40_000, 45_000) (180_000, 185_000)  [39m
+[38;5;15m  [39m[38;5;197mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.00015[39m[38;5;15m         [39m[38;5;242m# 0.00015  #ky 0.0003[39m
+[38;5;197mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mEVAL_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m200_000[39m
+[38;5;197mDATALOADER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mNUM_WORKERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4[39m
+

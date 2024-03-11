@@ -1,0 +1,635 @@
+CUDNN_BENCHMARK: false
+DATALOADER:
+  ASPECT_RATIO_GROUPING: true
+  FILTER_EMPTY_ANNOTATIONS: true
+  NUM_WORKERS: 4
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: []
+  PROPOSAL_FILES_TRAIN: []
+  TEST:
+  - coco_2017_val_panoptic_caption
+  - ade20k_sem_seg_val
+  - cityscapes_fine_panoptic_val
+  TRAIN:
+  - coco_2017_train_panoptic_caption
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  COLOR_AUG_SSD: false
+  CROP:
+    ENABLED: false
+    SINGLE_CATEGORY_MAX_AREA: 1.0
+    SIZE:
+    - 0.9
+    - 0.9
+    TYPE: relative_range
+  DATASET_MAPPER_NAME: detr_panoptic_caption_kd
+  FORMAT: RGB
+  IMAGE_SIZE: 512
+  MASK_FORMAT: polygon
+  MAX_SCALE: 2.0
+  MAX_SIZE_TEST: 1333
+  MAX_SIZE_TRAIN: 1333
+  MIN_SCALE: 0.1
+  MIN_SIZE_TEST: 800
+  MIN_SIZE_TRAIN:
+  - 800
+  MIN_SIZE_TRAIN_SAMPLING: choice
+  RANDOM_FLIP: horizontal
+  SCALE_RESIZE:
+    ENABLED: true
+    SCALE_MAX: 1.2
+    SCALE_MIN: 0.8
+  SIZE_DIVISIBILITY: -1
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES:
+    - - -90
+      - 0
+      - 90
+    ASPECT_RATIOS:
+    - - 0.5
+      - 1.0
+      - 2.0
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES:
+    - - 32
+      - 64
+      - 128
+      - 256
+      - 512
+  BACKBONE:
+    FREEZE_AT: 0
+    NAME: CLIPResNetWithAttention
+  DEVICE: cuda
+  FC_CLIP:
+    CLIP_MODEL_NAME: convnext_large_d_320
+    CLIP_PRETRAINED_WEIGHTS: laion2b_s29b_b131k_ft_soup
+    EMBED_DIM: 768
+    ENSEMBLE_ON_VALID_MASK: false
+    GEOMETRIC_ENSEMBLE_ALPHA: 0.4
+    GEOMETRIC_ENSEMBLE_BETA: 0.8
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: []
+    NORM: ''
+    OUT_CHANNELS: 256
+  FREEZE_BACKBONE: false
+  GROUNDING:
+    ALIGNMENT: softmax
+    ALIGNMENT_TEMPERATURE: 10.0
+    ALIGN_REGIONS_TO_WORDS: true
+    ALIGN_WORDS_TO_REGIONS: true
+    ENABLED: true
+    GATHER: false
+    GLOBAL_METRIC: aligned_local
+    LOCAL_METRIC: clip_cosine
+    LOSS: cross_entropy
+    LOSS_WEIGHT: 2.0
+    NEGATIVE_MINING: random
+    TRIPLET_MARGIN: 1.0
+  KD:
+    ENABLED: true
+    FAST_KD: true
+    KD_TYPE: vision
+    KD_WEIGHT: 2.0
+    MAX_LIST_LEN: 200
+    STU_SOURCE: prior
+    TEC_SOURCE: attn_g
+    TEXT_KD_WEIGHT: -1.0
+  KEYPOINT_ON: false
+  LEARNED_TEMP: true
+  LOAD_PROPOSALS: false
+  MASK_FORMER:
+    CLASS_WEIGHT: 10.0
+    DEC_LAYERS: 10
+    DEEP_SUPERVISION: true
+    DICE_WEIGHT: 5.0
+    DIM_FEEDFORWARD: 2048
+    DROPOUT: 0.0
+    ENC_LAYERS: 0
+    ENFORCE_INPUT_PROJ: false
+    HIDDEN_DIM: 256
+    IMPORTANCE_SAMPLE_RATIO: 0.75
+    MASK_CLASSIFICATION: false
+    MASK_WEIGHT: 5.0
+    NHEADS: 8
+    NO_OBJECT_WEIGHT: 0.1
+    NUM_OBJECT_QUERIES: 100
+    OVERSAMPLE_RATIO: 3.0
+    PRE_NORM: false
+    SIZE_DIVISIBILITY: 32
+    TEST:
+      INSTANCE_ON: false
+      OBJECT_MASK_THRESHOLD: 0.8
+      OVERLAP_THRESHOLD: 0.8
+      PANOPTIC_ON: false
+      SEMANTIC_ON: true
+      SEM_SEG_POSTPROCESSING_BEFORE_INFERENCE: false
+      VOCA_FULL_CLASS: false
+      VOCA_MULTINAME: false
+    TRAIN_NUM_POINTS: 12544
+    TRANSFORMER_DECODER_NAME: MultiScaleMaskedTransformerDecoderVoca
+    TRANSFORMER_IN_FEATURE: multi_scale_pixel_decoder
+  MASK_ON: false
+  META_ARCHITECTURE: OpenSegMaskFormerDenseTextKDLora
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: true
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PER_REGION:
+    DENSE_SUPERVISE: true
+    DROPOUT: 0.5
+    ENABLED: true
+    PLAIN_CLASS: true
+    PLAIN_LOSS_WEIGHT: 2.0
+    SYN_CLASS:
+      ENABLED: false
+      LOSS_WEIGHT: 10.0
+      TYPE: thresRand
+  PIXEL_MEAN:
+  - 123.675
+  - 116.28
+  - 103.53
+  PIXEL_STD:
+  - 58.395
+  - 57.12
+  - 57.375
+  PROJECTION: true
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  RESNETS:
+    DEFORM_MODULATED: false
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE:
+    - false
+    - false
+    - false
+    - false
+    DEPTH: 50
+    INPUT_RESOLUTION: 512
+    LAYERS:
+    - 3
+    - 4
+    - 6
+    - 3
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUTPUT_DIM: 1024
+    OUT_FEATURES:
+    - res2
+    - res3
+    - res4
+    - res5
+    - attn
+    PRETRAINED: pretrained/RN50.pt
+    RES2_OUT_CHANNELS: 256
+    RES4_DILATION: 1
+    RES5_DILATION: 1
+    RES5_MULTI_GRID:
+    - 1
+    - 1
+    - 1
+    STEM_OUT_CHANNELS: 64
+    STEM_TYPE: basic
+    STRIDE_IN_1X1: false
+    WIDTH: 64
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_WEIGHTS: &id002
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES:
+    - p3
+    - p4
+    - p5
+    - p6
+    - p7
+    IOU_LABELS:
+    - 0
+    - -1
+    - 1
+    IOU_THRESHOLDS:
+    - 0.4
+    - 0.5
+    NMS_THRESH_TEST: 0.5
+    NORM: ''
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS:
+    - &id001
+      - 10.0
+      - 10.0
+      - 5.0
+      - 5.0
+    - - 20.0
+      - 20.0
+      - 10.0
+      - 10.0
+    - - 30.0
+      - 30.0
+      - 15.0
+      - 15.0
+    IOUS:
+    - 0.5
+    - 0.6
+    - 0.7
+  ROI_BOX_HEAD:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: *id001
+    CLS_AGNOSTIC_BBOX_REG: false
+    CONV_DIM: 256
+    FC_DIM: 1024
+    FED_LOSS_FREQ_WEIGHT_POWER: 0.5
+    FED_LOSS_NUM_CLASSES: 50
+    NAME: ''
+    NORM: ''
+    NUM_CONV: 0
+    NUM_FC: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: false
+    USE_FED_LOSS: false
+    USE_SIGMOID_CE: false
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 512
+    IN_FEATURES:
+    - res4
+    IOU_LABELS:
+    - 0
+    - 1
+    IOU_THRESHOLDS:
+    - 0.5
+    NAME: Res5ROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: true
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS:
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: true
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: false
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: ''
+    NUM_CONV: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: *id002
+    BOUNDARY_THRESH: -1
+    CONV_DIMS:
+    - -1
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES:
+    - res4
+    IOU_LABELS:
+    - 0
+    - -1
+    - 1
+    IOU_THRESHOLDS:
+    - 0.3
+    - 0.7
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 1000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 6000
+    PRE_NMS_TOPK_TRAIN: 12000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    ASPP_CHANNELS: 256
+    ASPP_DILATIONS:
+    - 6
+    - 12
+    - 18
+    ASPP_DROPOUT: 0.1
+    COMMON_STRIDE: 4
+    CONVS_DIM: 256
+    DEFORMABLE_TRANSFORMER_ENCODER_IN_FEATURES:
+    - res3
+    - res4
+    - res5
+    DEFORMABLE_TRANSFORMER_ENCODER_N_HEADS: 8
+    DEFORMABLE_TRANSFORMER_ENCODER_N_POINTS: 4
+    IGNORE_VALUE: 255
+    IN_FEATURES:
+    - res2
+    - res3
+    - res4
+    - res5
+    LOSS_TYPE: hard_pixel_mining
+    LOSS_WEIGHT: 1.0
+    MASK_DIM: 256
+    NAME: MaskFormerHead
+    NORM: GN
+    NUM_CLASSES: 133
+    PIXEL_DECODER_NAME: MSDeformAttnPixelDecoder
+    PROJECT_CHANNELS:
+    - 48
+    PROJECT_FEATURES:
+    - res2
+    TRANSFORMER_ENC_LAYERS: 6
+    USE_DEPTHWISE_SEPARABLE_CONV: false
+  SWIN:
+    APE: false
+    ATTN_DROP_RATE: 0.0
+    DEPTHS:
+    - 2
+    - 2
+    - 6
+    - 2
+    DROP_PATH_RATE: 0.3
+    DROP_RATE: 0.0
+    EMBED_DIM: 96
+    MLP_RATIO: 4.0
+    NUM_HEADS:
+    - 3
+    - 6
+    - 12
+    - 24
+    OUT_FEATURES:
+    - res2
+    - res3
+    - res4
+    - res5
+    PATCH_NORM: true
+    PATCH_SIZE: 4
+    PRETRAIN_IMG_SIZE: 224
+    QKV_BIAS: true
+    QK_SCALE: null
+    USE_CHECKPOINT: false
+    WINDOW_SIZE: 7
+  TEXT_ENCODER:
+    CONTEXT_LENGTH: 77
+    EMBED_DIM: 1024
+    INPUT: coco
+    OUT_DIM: 256
+    PRETRAINED: pretrained/RN50.pt
+    PROMPT: '{}'
+    TRANSFORMER_HEADS: 8
+    TRANSFORMER_LAYERS: 12
+    TRANSFORMER_WIDTH: 512
+    VOCAB_SIZE: 49408
+  VISION_FEATURE: queryClass
+  VIT:
+    DROP_PATH_RATE: 0.1
+    HEADS: 12
+    INPUT_RESOLUTION: 512
+    LAYERS: 12
+    OUTPUT_DIM: 512
+    OUT_FEATURES:
+    - res2
+    - res3
+    - res4
+    - res5
+    - attn
+    OUT_INDICES:
+    - 3
+    - 5
+    - 7
+    - 11
+    PATCH_SIZE: 16
+    PRETRAINED: null
+    WIDTH: 768
+  WEIGHTS: ''
+OUTPUT_DIR: lora_TEST
+RANK:
+  rank:
+  - 97
+  - 125
+  - 119
+  - 116
+  - 121
+  - 0
+  - 32
+  - 96
+  - 94
+  - 129
+  - 131
+  - 100
+  - 122
+  - 102
+  - 124
+  - 84
+  - 19
+  - 103
+  - 90
+  - 91
+  - 71
+  - 81
+  - 123
+  - 24
+  - 117
+  - 115
+  - 50
+  - 22
+  - 38
+  - 132
+  - 18
+  - 126
+  - 106
+  - 80
+  - 64
+  - 104
+  - 63
+  - 56
+  - 105
+  - 37
+  - 2
+  - 20
+  - 98
+  - 92
+  - 62
+  - 51
+  - 3
+  - 46
+  - 26
+  - 82
+  - 68
+  - 49
+  - 35
+  - 33
+  - 120
+  - 13
+  - 47
+  - 25
+  - 42
+  - 118
+  - 54
+  - 101
+  - 111
+  - 17
+  - 86
+  - 74
+  - 8
+  - 28
+  - 41
+  - 14
+  - 1
+  - 75
+  - 93
+  - 130
+  - 44
+  - 40
+  - 60
+  - 58
+  - 61
+  - 45
+  - 108
+  - 113
+  - 107
+  - 30
+  - 79
+  - 87
+  - 7
+  - 88
+  - 99
+  - 31
+  - 66
+  - 5
+  - 9
+  - 34
+  - 127
+  - 16
+  - 85
+  - 43
+  - 112
+  - 4
+  - 67
+  - 23
+  - 109
+  - 89
+  - 39
+  - 11
+  - 29
+  - 53
+  - 114
+  - 27
+  - 83
+  - 6
+  - 55
+  - 128
+  - 110
+  - 57
+  - 70
+  - 76
+  - 69
+  - 48
+  - 52
+  - 77
+  - 15
+  - 73
+  - 95
+  - 59
+  - 65
+  - 12
+  - 72
+  - 36
+  - 21
+  - 10
+  - 78
+SEED: 1
+SOLVER:
+  AMP:
+    ENABLED: true
+  BACKBONE_MULTIPLIER: 0.1
+  BASE_LR: 0.00015
+  BASE_LR_END: 0.0
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 5000
+  CLIP_GRADIENTS:
+    CLIP_TYPE: full_model
+    CLIP_VALUE: 0.01
+    ENABLED: true
+    NORM_TYPE: 2.0
+  GAMMA: 0.1
+  IMS_PER_BATCH: 28
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 50001
+  MOMENTUM: 0.9
+  NESTEROV: false
+  NUM_DECAYS: 3
+  OPTIMIZER: ADAMW
+  POLY_LR_CONSTANT_ENDING: 0.0
+  POLY_LR_POWER: 0.9
+  REFERENCE_WORLD_SIZE: 0
+  RESCALE_INTERVAL: false
+  STEPS:
+  - 20000
+  - 25000
+  WARMUP_FACTOR: 1.0
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.05
+  WEIGHT_DECAY_BIAS: null
+  WEIGHT_DECAY_EMBED: 0.0
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: false
+    FLIP: true
+    MAX_SIZE: 4000
+    MIN_SIZES:
+    - 400
+    - 500
+    - 600
+    - 700
+    - 800
+    - 900
+    - 1000
+    - 1100
+    - 1200
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 200000
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: false
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
