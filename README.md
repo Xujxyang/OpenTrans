@@ -179,7 +179,7 @@ Efficient Fine-tuning(Resnet-50).
     <td align="center">164.5P</td>
   </tr>
     <tr>
-    <td align="center">\alpha*(Han et al.)</td>
+    <td align="center">$\alpha*$(Han et al.)</td>
     <td align="center">45.3</td>
     <td align="center">33.6</td>
     <td align="center">16.7</td>
@@ -190,7 +190,7 @@ Efficient Fine-tuning(Resnet-50).
     <td align="center">172.3p</td>
   </tr>
     <tr>
-    <td align="center">alpha(Han et al.)</td>
+    <td align="center">$\alpha$(Han et al.)</td>
     <td align="center">47.2</td>
     <td align="center">34.0</td>
     <td align="center">17.3</td>
