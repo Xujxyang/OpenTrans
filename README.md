@@ -10,3 +10,23 @@ Recent success of pre-trained foundation vision-language models makes Open-Vocab
  
 ## Installation
 You can configure the dataset and runtime environment based on the settings provided in [fc-clip](https://github.com/bytedance/fc-clip). 
+
+## Result
+<table>
+<thead>
+  <tr>
+    <td align="center">Model</td>
+    <td align="center">COCO</td>
+    <td align="center">Cityscapes</td>
+    <td align="center">ADE20K-150</td>
+    <td align="center">ADE20K-847</td>
+    <td align="center">PAS-20</td>
+    <td align="center">PC-59</td>
+    <td align="center">PC-459</td>
+    <td align="center">Params</td>
+    <td align="center">FLOPs</td>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
