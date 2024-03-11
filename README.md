@@ -136,6 +136,6 @@ Model efficiency via subnetwork transfer(Resnet-50).
     <td align="center">9.9</td>
     <td align="center">17.8M</td>
     <td align="center">105.6G</td>
-  </tr>****
+  </tr>
 </tbody>
 </table>
