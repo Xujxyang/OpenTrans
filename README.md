@@ -12,7 +12,7 @@ Recent success of pre-trained foundation vision-language models makes Open-Vocab
 You can configure the dataset and runtime environment based on the settings provided in [fc-clip](https://github.com/bytedance/fc-clip). 
 
 ## Getting Started
-See [Getting Started]()
+See [Getting Started](Getting_started.md)
 
 ## Result
 Model efficiency via subnetwork transfer(Resnet-50).
