@@ -28,5 +28,78 @@ You can configure the dataset and runtime environment based on the settings prov
   </tr>
 </thead>
 <tbody>
+  <tr>
+    <td align="center">Han et al.</td>
+    <td align="center">46.0</td>
+    <td align="center">33.9</td>
+    <td align="center">16.6</td>
+    <td align="center">2.5</td>
+    <td align="center">71.2</td>
+    <td align="center">39.0</td>
+    <td align="center">7.1</td>
+    <td align="center">44.1M</td>
+    <td align="center">268.2G</td>
+  </tr>
+    <tr>
+    <td align="center">Random(Han et al.)</td>
+    <td align="center">37.4</td>
+    <td align="center">28.7</td>
+    <td align="center">13.2</td>
+    <td align="center">2.2</td>
+    <td align="center">60.1</td>
+    <td align="center">33.2</td>
+    <td align="center">5.8</td>
+    <td align="center">22.9M</td>
+    <td align="center">173.3G</td>
+  </tr>
+    <tr>
+    <td align="center">Ours(Han et al.)</td>
+    <td align="center">42.5</td>
+    <td align="center">31.7</td>
+    <td align="center">15.8</td>
+    <td align="center">2.6</td>
+    <td align="center">64.6</td>
+    <td align="center">35.1</td>
+    <td align="center">6.4</td>
+    <td align="center">22.9M</td>
+    <td align="center">173.3G</td>
+  </tr>
+    <tr>
+    <td align="center">DeeplabV3</td>
+    <td align="center">26.3</td>
+    <td align="center">20.3</td>
+    <td align="center">8.8</td>
+    <td align="center">-</td>
+    <td align="center">44.1</td>
+    <td align="center">23.9</td>
+    <td align="center">4.1</td>
+    <td align="center">40.3M</td>
+    <td align="center">241.3G</td>
+  </tr>
+    <tr>
+    <td align="center">Random(DeeplabV3)</td>
+    <td align="center">17.9</td>
+    <td align="center">16.3</td>
+    <td align="center">6.4</td>
+    <td align="center">-</td>
+    <td align="center">30.2</td>
+    <td align="center">16.5</td>
+    <td align="center">2.7</td>
+    <td align="center">19.1M</td>
+    <td align="center">146.8G</td>
+  </tr>
+    <tr>
+    <td align="center">Ours(DeeplabV3)</td>
+    <td align="center">34.8</td>
+    <td align="center">24.3</td>
+    <td align="center">10.8</td>
+    <td align="center">-</td>
+    <td align="center">55.2</td>
+    <td align="center">28.9</td>
+    <td align="center">5.2</td>
+    <td align="center">19.1M</td>
+    <td align="center">146.8G</td>
+  </tr>
 </tbody>
+  
 </table>
