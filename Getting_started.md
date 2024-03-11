@@ -1,4 +1,4 @@
-When you have prepared the environment and dataset according to the description of fc-clip, you also need to configure the method for running the selective layer based on the requirements we provide.\
+When you have prepared the environment and dataset according to the description of fc-clip, you also need to configure the method for running the selective layer based on the requirements we provide. In addition, you would need to download the pre-trained weights for CLIP-RT50.\
 Let's get started!\
 Please use the following command to load the data path:
 ```bash
