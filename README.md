@@ -207,7 +207,7 @@ Efficient Fine-tuning(Resnet-50).
 </table>
 
 ## Acknowledgement
-[Mask2Former](https://github.com/facebookresearch/Mask2Former)
-[fc-clip](https://github.com/bytedance/fc-clip)
+[Mask2Former](https://github.com/facebookresearch/Mask2Former)\
+[fc-clip](https://github.com/bytedance/fc-clip)\
 [Han et al.](https://arxiv.org/abs/2303.09181)
 
