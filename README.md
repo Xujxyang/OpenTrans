@@ -139,3 +139,68 @@ Model efficiency via subnetwork transfer(Resnet-50).
   </tr>
 </tbody>
 </table>
+
+Efficient Fine-tuning(Resnet-50).
+<table>
+<thead>
+  <tr>
+    <td align="center">Model</td>
+    <td align="center">COCO</td>
+    <td align="center">Cityscapes</td>
+    <td align="center">ADE20K-150</td>
+    <td align="center">ADE20K-847</td>
+    <td align="center">PAS-20</td>
+    <td align="center">PC-59</td>
+    <td align="center">PC-459</td>
+    <td align="center">Training FLOPs</td>
+  </tr>
+</thead>
+<tbody>
+ <tr>
+    <td align="center">Han et al.</td>
+    <td align="center">46.0</td>
+    <td align="center">33.9</td>
+    <td align="center">16.6</td>
+    <td align="center">2.5</td>
+    <td align="center">71.2</td>
+    <td align="center">39.0</td>
+    <td align="center">7.1</td>
+    <td align="center">181.4P</td>
+  </tr>
+    <tr>
+    <td align="center">Random(Han et al.)</td>
+    <td align="center">44.5</td>
+    <td align="center">33.5</td>
+    <td align="center">16.4</td>
+    <td align="center">2.5</td>
+    <td align="center">70.1</td>
+    <td align="center">38.5</td>
+    <td align="center">7.2</td>
+    <td align="center">164.5P</td>
+  </tr>
+    <tr>
+    <td align="center">\alpha*(Han et al.)</td>
+    <td align="center">45.3</td>
+    <td align="center">33.6</td>
+    <td align="center">16.7</td>
+    <td align="center">2.7</td>
+    <td align="center">73.2</td>
+    <td align="center">39.2</td>
+    <td align="center">7.3</td>
+    <td align="center">172.3p</td>
+  </tr>
+    <tr>
+    <td align="center">alpha(Han et al.)</td>
+    <td align="center">47.2</td>
+    <td align="center">34.0</td>
+    <td align="center">17.3</td>
+    <td align="center">2.9</td>
+    <td align="center">74.0</td>
+    <td align="center">39.9</td>
+    <td align="center">7.7</td>
+    <td align="center">159.6P</td>
+  </tr>
+</tbody>
+</table>
+
+
