@@ -480,7 +480,6 @@ def do_train(cfg, model, resume=True):
             #     # kth_largest = np.partition(metrics['alpha'], k)[k]
             #     # import pdb; pdb.set_trace()
             #     frozen = []
-            #     # frozen = metrics['longname'][-28:]
             #     for i in range(len(metrics['alpha'])):
             #         if metrics['alpha'][i] < mid:
             #             frozen.append(metrics['longname'][i])
