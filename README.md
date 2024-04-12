@@ -1,5 +1,5 @@
 # OpenTrans
-This repo contains the code for our paper [**Transferable and Principled Efficiency for Open-Vocabulary Segmentation**]
+This repo contains the code for our paper [**Transferable and Principled Efficiency for Open-Vocabulary Segmentation**](https://arxiv.org/abs/2404.07448)
 
 <div align="center">
   <img src="imgs/structure9.jpg" width="90%" height="90%"/>
